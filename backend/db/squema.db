@@ -1,0 +1,79 @@
+
+
+CREATE DATABASE storage;
+
+CREATE TABLE rol (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(25)
+);
+
+CREATE TABLE categoria (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(25)
+);
+
+CREATE TABLE articulo (
+    id SERIAL PRIMARY KEY, 
+    nombre VARCHAR(25) NOT NULL,
+    descripcion VARCHAR(300) NOT NULL,
+    categoria_id INT REFERENCES categoria(id),
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    img VARCHAR(1000)
+);
+
+CREATE TABLE carrito (
+    id SERIAL PRIMARY KEY,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(10)
+);
+
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(25),
+    correo_electronico VARCHAR(100),
+    contraseña VARCHAR(255),
+    direccion VARCHAR(100),
+    telefono VARCHAR(15),
+    rol_id INT  REFERENCES rol(id)
+);
+
+CREATE TABLE detalle_carrito (
+    id SERIAL PRIMARY KEY,
+    carrito_id INT REFERENCES carrito(id),
+    articulo_id INT  REFERENCES articulo(id),
+    cantidad INT NOT NULL
+);
+
+CREATE TABLE pedido (
+    id SERIAL PRIMARY KEY,
+    carrito_id INT REFERENCES carrito(id),
+    articulo_id INT REFERENCES articulo(id),
+    cantidad INT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL 
+);
+
+CREATE TABLE detalle_pedido (
+    id SERIAL PRIMARY KEY, 
+    pedido_id INT REFERENCES pedido(id),
+    articulo_id INT REFERENCES articulo(id),
+    precio_total DECIMAL(10, 2) NOT NULL,
+    cantidad_articulos INT NOT NULL
+);
+
+
+ALTER TABLE detalle_carrito
+ADD CONSTRAINT fk_carrito_articulo
+FOREIGN KEY (articulo_id) REFERENCES articulo(id)
+ON DELETE CASCADE;
+
+
+ALTER TABLE pedido
+ADD CONSTRAINT fk_pedido_articulo
+FOREIGN KEY (articulo_id) REFERENCES articulo(id)
+ON DELETE CASCADE;
+
+ALTER TABLE detalle_pedido
+ADD CONSTRAINT fk_detallepedido_articulo
+FOREIGN KEY (articulo_id) REFERENCES articulo(id)
+ON DELETE CASCADE;
