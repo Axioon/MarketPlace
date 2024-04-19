@@ -49,6 +49,7 @@ CREATE TABLE pedido (
     id SERIAL PRIMARY KEY,
     carrito_id INT REFERENCES carrito(id),
     articulo_id INT REFERENCES articulo(id),
+    usuario_id INT REFERENCESS usuario(id)
     cantidad INT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL 
 );
