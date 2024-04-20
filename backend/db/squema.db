@@ -62,7 +62,7 @@ CREATE TABLE detalle_pedido (
 
 CREATE TABLE oferta (
     id SERIAL PRIMARY KEY,
-    descuento DECIMAL(5, 2), -- Porcentaje de descuento
+    descuento DECIMAL(5, 2), 
     fecha_inicio DATE,
     fecha_fin DATE
 );
