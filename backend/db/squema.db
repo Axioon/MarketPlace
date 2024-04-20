@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE storage;
 
 CREATE TABLE rol (
@@ -35,13 +33,13 @@ CREATE TABLE usuario (
     contraseña VARCHAR(255),
     direccion VARCHAR(100),
     telefono VARCHAR(15),
-    rol_id INT  REFERENCES rol(id)
+    rol_id INT REFERENCES rol(id)
 );
 
 CREATE TABLE detalle_carrito (
     id SERIAL PRIMARY KEY,
     carrito_id INT REFERENCES carrito(id),
-    articulo_id INT  REFERENCES articulo(id),
+    articulo_id INT REFERENCES articulo(id),
     cantidad INT NOT NULL
 );
 
@@ -49,7 +47,7 @@ CREATE TABLE pedido (
     id SERIAL PRIMARY KEY,
     carrito_id INT REFERENCES carrito(id),
     articulo_id INT REFERENCES articulo(id),
-    usuario_id INT REFERENCESS usuario(id)
+    usuario_id INT REFERENCES usuario(id),
     cantidad INT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL 
 );
@@ -62,12 +60,24 @@ CREATE TABLE detalle_pedido (
     cantidad_articulos INT NOT NULL
 );
 
+CREATE TABLE oferta (
+    id SERIAL PRIMARY KEY,
+    descuento DECIMAL(5, 2), -- Porcentaje de descuento
+    fecha_inicio DATE,
+    fecha_fin DATE
+);
+
+CREATE TABLE articulo_oferta (
+    articulo_id INT REFERENCES articulo(id),
+    oferta_id INT REFERENCES oferta(id),
+    PRIMARY KEY (articulo_id, oferta_id),
+    FOREIGN KEY (articulo_id) REFERENCES articulo(id) ON DELETE CASCADE
+);
 
 ALTER TABLE detalle_carrito
 ADD CONSTRAINT fk_carrito_articulo
 FOREIGN KEY (articulo_id) REFERENCES articulo(id)
 ON DELETE CASCADE;
-
 
 ALTER TABLE pedido
 ADD CONSTRAINT fk_pedido_articulo
