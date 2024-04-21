@@ -18,8 +18,8 @@ function Footer() {
                 </div>
                 <div>
                     <h2 className="font-bold text-lg">Contáctanos</h2>
-                    <p className="mt-2">Email: info@empresa.com</p>
-                    <p>Tel: +123 456 7890</p>
+                    <p className="mt-2">Email: AxiosTecnology@empresa.com</p>
+                    <p>Tel: +569 5555 5555</p>
                 </div>
             </div>
             <div className="text-center mt-8 md:mt-0">
