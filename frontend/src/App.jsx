@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from "./views/Home";
-import CreateAccount from "./views/CreateAccount"; // Asegúrate de que la ruta es correcta
+import CreateAccount from "./views/CreateAccount"; 
 import './App.css';
 import SignIn from './views/SingIn';
 import Contact from './views/Contact';
@@ -20,7 +20,6 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/acerca-de-nosotros" element={<Nosotros />} />
-        {/* Añade más rutas según necesites */}
       </Routes>
       <Footer />
     </div>

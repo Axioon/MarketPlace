@@ -1,14 +1,16 @@
 //Home.jsx
-import React from "react";
-
+import React from 'react';
+import Menu from "../components/Menu.jsx";
+import Cards from "../components/Cards.jsx";
 
 const Home = () => {
-  return (
-    <>
-    <h1>HASJHSAHSADHJSAHJSDA</h1>
+    return (
+        <>
+            <Menu />
+            <Cards />
+        </>
+    )
+}
 
-    </>
-  );
-};
 
-export default Home
+export default Home;
