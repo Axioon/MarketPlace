@@ -7,8 +7,9 @@ import CreateAccount from "./views/CreateAccount";
 import SignIn from './views/SingIn'; // Asegúrate de que esta es la ruta correcta y el nombre del archivo
 import Contact from './views/Contact';
 import Nosotros from './views/Nosotros';
-import './App.css';
 import Shop from './views/Shop';
+import Articles from './views/Articles';
+import './App.css';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cart" element={<Shop />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/acerca-de-nosotros" element={<Nosotros />} />
+          <Route path="/hardware/tarjeta-de-video" element={<Articles />} />
         </Routes>
       </div>
       <Footer />
