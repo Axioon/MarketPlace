@@ -1,72 +1,36 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Cards = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/v1/articulos-con-oferta')
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos de los productos:', error);
+      });
+  }, []);
+
   return (
     <div className="container mx-auto py-8">
-      
-      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Producto 1 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 1</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$99.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
+        {products.map(product => (
+          <div key={product.id} className="bg-white rounded-lg shadow-lg p-6">
+            <img src={product.img} alt={product.nombre} className="mx-auto mb-4" />
+            <h2 className="text-xl font-semibold mb-2">{product.nombre}</h2>
+            <p className="text-gray-600">{product.descripcion}</p>
+            <div className="mt-4 flex justify-between items-center">
+            <span className="text-xl font-semibold">
+  ${parseFloat(product.precio_con_descuento).toFixed(2)}
+</span>
+              <span className="text-gray-500 line-through">${product.precio}</span>
+              <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
+            </div>
           </div>
-        </div>
-
-        {/* Producto 2 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 2</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$49.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
-          </div>
-        </div>
-
-        {/* Producto 3 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 3</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$29.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
-          </div>
-        </div>
-        {/* Producto 4 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 3</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$29.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
-          </div>
-        </div>
-        {/* Producto 5 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 3</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$29.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
-          </div>
-        </div>
-        {/* Producto 6 */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <img src="https://via.placeholder.com/300" alt="Product" className="mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Producto 3</h2>
-          <p className="text-gray-600">Descripción del producto. Puedes agregar información relevante aquí.</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xl font-semibold">$29.99</span>
-            <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Agregar al carrito</button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
