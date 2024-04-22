@@ -1,29 +1,10 @@
 //Contact.jsx
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CountProvider } from "../context/CountProvider.jsx";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    rut: "",
-    nombre: "",
-    correo: "",
-    telefono: "",
-    numeroDocumento: "",
-    comentario: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    // Aquí puedes agregar la lógica para enviar el formulario de contacto al backend
-  };
+ 
+const { formData, setFormData, handleChange, handleSubmit } = useContext();
 
   return (
     <div className="max-w-md mx-auto mt-10 px-4 py-8 bg-white shadow-lg rounded-lg">
