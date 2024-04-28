@@ -30,7 +30,7 @@ CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25),
     correo_electronico VARCHAR(100),
-    contraseña VARCHAR(255),
+    contrasena VARCHAR(255),
     direccion VARCHAR(100),
     telefono VARCHAR(15),
     rol_id INT REFERENCES rol(id)

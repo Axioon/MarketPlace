@@ -5,7 +5,7 @@ const Cards = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/articulos-con-oferta')
+    axios.get('http://localhost:3000/api/v1/articulos-con-oferta')
       .then(response => {
         setProducts(response.data);
       })
