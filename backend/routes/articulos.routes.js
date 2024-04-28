@@ -1,4 +1,4 @@
-//articulos.routes.js
+//backend\routes\articulos.routes.js
 
 import express from 'express';
 import { getArticulo,createPost,deletePost,putPost } from "../src/controllers/articulos.controller.js";
@@ -12,7 +12,9 @@ router.post('/articulo',createPost)
 router.put('/articulo/:id',putPost)
 router.delete('/articulo/:id',deletePost)
 
+
 router.post('/auth/register', registerUser);
+
 router.post('/auth/login', loginUser);
 
 
