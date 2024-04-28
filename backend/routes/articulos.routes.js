@@ -1,3 +1,5 @@
+//articulos.routes.js
+
 import { Router } from "express";
 import { getArticulo,createPost,deletePost,putPost } from "../src/controllers/articulos.controller.js";
 import { obtenerArticulosConOferta } from '../src/controllers/articulo.oferta.controller.js';

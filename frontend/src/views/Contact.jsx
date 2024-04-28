@@ -1,10 +1,9 @@
-//Contact.jsx
-import React, { useContext, useState } from "react";
-import { CountProvider } from "../context/CountProvider.jsx";
+import React, { useContext } from "react";
+import { CountContext } from "../context/CountProvider.jsx";
 
 const Contact = () => {
- 
-const { formData, setFormData, handleChange, handleSubmit } = useContext();
+  // Aquí pasamos el contexto CountContext como argumento a useContext
+  const { formData, setFormData, handleChange, handleSubmit } = useContext(CountContext);
 
   return (
     <div className="max-w-md mx-auto mt-10 px-4 py-8 bg-white shadow-lg rounded-lg">
