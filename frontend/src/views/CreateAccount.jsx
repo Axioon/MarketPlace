@@ -1,127 +1,155 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from '../config/axiosConfig'; // Asegúrate de que la ruta sea correcta según tu estructura de proyecto
 
 const CreateAccount = () => {
+  // Inicialización completa de todos los campos para evitar inputs no controlados
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    address: "",
-    phone: "",
+    nombre: "",
+    correo_electronico: "",
+    contraseña: "",
+    direccion: "",
+    telefono: "",
+    rol_id: "2",  // Suponiendo que "2" es el rol por defecto para usuarios registrados
+    repeatPassword: ""  // Campo adicional para confirmar la contraseña
   });
+
+  const navigate = useNavigate(); // Hook para manejar la navegación programática
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
+    setFormData(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simple validation example
-    if (formData.password !== formData.repeatPassword) {
+    if (formData.contraseña !== formData.repeatPassword) {
       alert("Las contraseñas no coinciden.");
       return;
     }
-    console.log("Form Data Submitted:", formData);
+
+    // Envía los datos al backend para registrar un nuevo usuario
+    axios.post('/auth/register', {
+      nombre: formData.nombre,
+      correo_electronico: formData.correo_electronico,
+      contraseña: formData.contraseña,
+      direccion: formData.direccion,
+      telefono: formData.telefono,
+      rol_id: formData.rol_id
+    })
+    .then(response => {
+      console.log("Registro exitoso:", response.data);
+      navigate('/signin'); // Redirecciona al usuario a la página de inicio de sesión
+    })
+    .catch(error => {
+      console.error("Error en el registro:", error.response);
+      alert("Error al registrar usuario: " + (error.response && error.response.data.message ? error.response.data.message : ""));
+    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 px-4 py-8 bg-white shadow-lg rounded-lg">
       <h1 className="text-xl font-semibold mb-4 text-center">Crear Cuenta</h1>
       <form onSubmit={handleSubmit}>
+        {/* Detalle de cada campo del formulario */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+          <label htmlFor="nombre" className="block text-gray-700 text-sm font-bold mb-2">
             Nombre
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
             type="text"
-            placeholder="Nombre"
-            name="name"
-            value={formData.name}
+            name="nombre"
+            id="nombre"
+            value={formData.nombre}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Tu nombre completo"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            Email
+          <label htmlFor="correo_electronico" className="block text-gray-700 text-sm font-bold mb-2">
+            Correo Electrónico
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
             type="email"
-            placeholder="Email"
-            name="email"
-            value={formData.email}
+            name="correo_electronico"
+            id="correo_electronico"
+            value={formData.correo_electronico}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Correo electrónico"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password
+          <label htmlFor="contraseña" className="block text-gray-700 text-sm font-bold mb-2">
+            Contraseña
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
             type="password"
-            placeholder="Password"
-            name="password"
-            value={formData.password}
+            name="contraseña"
+            id="contraseña"
+            value={formData.contraseña}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Contraseña"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="repeatPassword">
-            Repetir Password
+          <label htmlFor="repeatPassword" className="block text-gray-700 text-sm font-bold mb-2">
+            Repetir Contraseña
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="repeatPassword"
             type="password"
-            placeholder="Repetir Password"
             name="repeatPassword"
+            id="repeatPassword"
             value={formData.repeatPassword}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Confirma tu contraseña"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+          <label htmlFor="direccion" className="block text-gray-700 text-sm font-bold mb-2">
             Dirección
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address"
             type="text"
-            placeholder="Dirección"
-            name="address"
-            value={formData.address}
+            name="direccion"
+            id="direccion"
+            value={formData.direccion}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Dirección física"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+          <label htmlFor="telefono" className="block text-gray-700 text-sm font-bold mb-2">
             Teléfono
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="phone"
             type="text"
-            placeholder="Teléfono"
-            name="phone"
-            value={formData.phone}
+            name="telefono"
+            id="telefono"
+            value={formData.telefono}
             onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Número de teléfono"
           />
         </div>
         <button
           type="submit"
           className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Registro
+          Registrar
         </button>
       </form>
       <div className="text-center mt-4">
@@ -134,4 +162,3 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
-
