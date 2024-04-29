@@ -1,5 +1,7 @@
 import { createGetModelArticulo,createPostModelArticulo,putPostModelArtriculo,deletePostModelArticulo } from "../models/articulos.model.js"
 import pool from "../../db/conectionDB.js"
+
+
 export const  getArticulo= async (req,res)=>{
     try {
         const posts= await createGetModelArticulo()

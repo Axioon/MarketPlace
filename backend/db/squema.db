@@ -5,10 +5,18 @@ CREATE TABLE rol (
     nombre VARCHAR(25)
 );
 
+INSERT INTO rol (nombre) VALUES ('Administrador');
+INSERT INTO rol (nombre) VALUES ('Usuario');
+INSERT INTO rol (nombre) VALUES ('Invitado');
+
 CREATE TABLE categoria (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25)
 );
+
+INSERT INTO categoria (nombre) VALUES ('hardware');
+INSERT INTO categoria (nombre) VALUES ('accesorios');
+INSERT INTO categoria (nombre) VALUES ('software');
 
 CREATE TABLE articulo (
     id SERIAL PRIMARY KEY, 
@@ -19,6 +27,31 @@ CREATE TABLE articulo (
     stock INT NOT NULL,
     img VARCHAR(1000)
 );
+
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Tarjeta Gráfica GTX 1080', 'Potente tarjeta gráfica para gaming', 1, 499.99, 10, 'url_imagen'),
+    ('Tarjeta Gráfica RTX 2080 Ti', 'Alto rendimiento para juegos de última generación', 1, 799.99, 5, 'url_imagen'),
+    ('Tarjeta Gráfica AMD Radeon RX 6800', 'Tarjeta gráfica de gama alta para jugadores exigentes', 1, 649.99, 8, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Procesador Intel Core i9-9900K', 'Procesador de alto rendimiento para aplicaciones exigentes', 1, 399.99, 15, 'url_imagen'),
+    ('Procesador AMD Ryzen 9 5900X', 'Procesador de alto rendimiento para gaming y multitarea', 1, 549.99, 10, 'url_imagen'),
+    ('Procesador Intel Core i7-10700K', 'Procesador potente para juegos y aplicaciones de productividad', 1, 349.99, 12, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Placa Base ASUS ROG Strix Z390-E', 'Placa base de alta gama para entusiastas de PC', 1, 259.99, 20, 'url_imagen'),
+    ('Placa Base MSI B450 TOMAHAWK MAX', 'Placa base sólida y confiable para sistemas de nivel medio', 1, 139.99, 25, 'url_imagen'),
+    ('Placa Base Gigabyte B550 AORUS ELITE', 'Placa base con soporte para PCIe 4.0 y diseño robusto', 1, 189.99, 18, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Memoria RAM Corsair Vengeance LPX 16GB', 'Memoria RAM DDR4 de alta velocidad', 1, 89.99, 30, 'url_imagen'),
+    ('Memoria RAM G.SKILL Trident Z RGB 32GB', 'Memoria RAM DDR4 de alta capacidad con iluminación RGB', 1, 169.99, 15, 'url_imagen'),
+    ('Memoria RAM HyperX Fury 8GB', 'Memoria RAM DDR4 confiable y económica', 1, 49.99, 20, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Disco Duro SSD Samsung 970 EVO 1TB', 'Almacenamiento SSD de alta velocidad y capacidad', 1, 179.99, 25, 'url_imagen'),
+    ('Disco Duro SSD Crucial MX500 500GB', 'Disco SSD confiable y de alto rendimiento', 1, 89.99, 20, 'url_imagen'),
+    ('Disco Duro SSD Western Digital Blue 1TB', 'Almacenamiento SSD rápido y duradero', 1, 99.99, 30, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
+    ('Gabinete NZXT H510', 'Gabinete moderno y elegante para tu PC', 1, 99.99, 40, 'url_imagen'),
+    ('Gabinete Corsair Crystal 570X RGB', 'Gabinete con paneles de vidrio templado y efectos de iluminación RGB', 1, 199.99, 12, 'url_imagen'),
+    ('Gabinete Cooler Master MasterBox Q300L', 'Diseño compacto y versátil para construcciones de PC', 1, 59.99, 35, 'url_imagen');
 
 CREATE TABLE carrito (
     id SERIAL PRIMARY KEY,
@@ -35,6 +68,11 @@ CREATE TABLE usuario (
     telefono VARCHAR(15),
     rol_id INT REFERENCES rol(id)
 );
+
+INSERT INTO usuario (nombre, correo_electronico, contrasena, direccion, telefono, rol_id) 
+VALUES ('Jose Lopez', 'j.lopez@gmail.com', '123', 'Dirección de usuario normal', '987654321', 2);
+INSERT INTO usuario (nombre, correo_electronico, contrasena, direccion, telefono, rol_id) 
+VALUES ('Admin', 'admin@gmail.com', '321', 'Dirección de administrador', '123123123', 1);
 
 CREATE TABLE detalle_carrito (
     id SERIAL PRIMARY KEY,
@@ -67,12 +105,16 @@ CREATE TABLE oferta (
     fecha_fin DATE
 );
 
+INSERT INTO oferta (descuento, fecha_inicio, fecha_fin) VALUES (10.00, '2024-04-01', '2024-04-30');
+
 CREATE TABLE articulo_oferta (
     articulo_id INT REFERENCES articulo(id),
     oferta_id INT REFERENCES oferta(id),
     PRIMARY KEY (articulo_id, oferta_id),
     FOREIGN KEY (articulo_id) REFERENCES articulo(id) ON DELETE CASCADE
 );
+
+INSERT INTO articulo_oferta (articulo_id, oferta_id) VALUES (1, 1);
 
 ALTER TABLE detalle_carrito
 ADD CONSTRAINT fk_carrito_articulo
