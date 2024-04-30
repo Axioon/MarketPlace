@@ -12,7 +12,8 @@ INSERT INTO rol (nombre) VALUES ('Invitado');
 CREATE TABLE categoria (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25)
-);
+)
+;
 
 INSERT INTO categoria (nombre) VALUES ('hardware');
 INSERT INTO categoria (nombre) VALUES ('accesorios');
