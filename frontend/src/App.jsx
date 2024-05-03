@@ -10,11 +10,13 @@ import Nosotros from './views/Nosotros';
 import Shop from './views/Shop';
 import Articles from './views/Articles';
 import './App.css';
+import { Modal } from './components/Modal';
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <Modal/>
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
