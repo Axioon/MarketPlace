@@ -28,9 +28,9 @@ function App() {
             <Route path="/acerca-de-nosotros" element={<Nosotros />} />
             <Route path="/cart" element={<Shop />} />
             <Route path="/hardware/tarjeta-de-video" element={<Articles />} />
-            <Route element={<PrivateRoute roleRequired={1} />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Route>
+            <Route path="/admin/*" element={<PrivateRoute roleRequired={1}>
+              <AdminDashboard />
+            </PrivateRoute>} />
           </Routes>
         </div>
         <Footer />

@@ -5,7 +5,6 @@ import axios from '../config/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 
-
 const SignIn = () => {
   const [formData, setFormData] = useState({
     correo_electronico: "",
@@ -29,13 +28,12 @@ const SignIn = () => {
         const { token, user } = response.data;
         localStorage.setItem('jwtToken', token);
         setAuthUser(user);
-        // Mostrar mensaje personalizado según el rol
-        if (user.rol_id === 1) { // Suponiendo que 1 es el ID de rol para administradores
+        if (user.rol_id === 1) {
           alert(`Bienvenido ${user.nombre} a la vista de Administrador de AxiosTechnology`);
           navigate('/admin');
         } else {
           alert(`Bienvenido ${user.nombre}`);
-          navigate('/'); // Navegar a la página de inicio o a otra página relevante para usuarios comunes
+          navigate('/');
         }
       })
       .catch(error => {

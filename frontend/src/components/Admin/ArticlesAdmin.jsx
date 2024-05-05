@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from './config/axios';
+import axios from '../../config/axiosConfig';
 
 const ArticlesAdmin = () => {
   const [articles, setArticles] = useState([]);
@@ -17,25 +17,11 @@ const ArticlesAdmin = () => {
     fetchArticles();
   }, []);
 
-  return (
-    <div>
-      <h1>Administrar Artículos</h1>
-      {articles.map(article => (
-        <div key={article.id}>
-          <h2>{article.nombre}</h2>
-          <p>{article.descripcion}</p>
-          <button onClick={() => handleEdit(article.id)}>Editar</button>
-          <button onClick={() => handleDelete(article.id)}>Eliminar</button>
-        </div>
-      ))}
-    </div>
-  );
-
-  function handleEdit(id) {
+  const handleEdit = (id) => {
     window.location.href = `/edit-article/${id}`;
-  }
+  };
 
-  async function handleDelete(id) {
+  const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que quieres eliminar este artículo?')) {
       try {
         await axios.delete(`/articulo/${id}`);
@@ -44,7 +30,21 @@ const ArticlesAdmin = () => {
         console.error('Error deleting article:', error);
       }
     }
-  }
+  };
+
+  return (
+    <div className="m-5">
+      <h1 className="text-lg font-bold mb-4">Administrar Artículos</h1>
+      {articles.map(article => (
+        <div key={article.id} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <h2 className="block text-gray-700 text-md font-bold mb-2">{article.nombre}</h2>
+          <p className="text-gray-700">{article.descripcion}</p>
+          <button onClick={() => handleEdit(article.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline mr-2">Editar</button>
+          <button onClick={() => handleDelete(article.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default ArticlesAdmin;

@@ -1,17 +1,15 @@
-//frontend\src\components\PrivateRoute.jsx
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-import React, { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from '../context/AuthProvider';
+function PrivateRoute({ children, roleRequired }) {
+    const location = useLocation();
+    const userRole = 1; // Esto debería provenir de algún contexto o autenticación de estado
 
-const PrivateRoute = ({ roleRequired }) => {
-  const { authUser } = useContext(AuthContext);
+    if (userRole !== roleRequired) {
+        return <Navigate to="/signin" state={{ from: location }} replace />;
+    }
 
-  if (!authUser || (roleRequired && authUser.rol_id !== roleRequired)) {
-    return <Navigate to="/signin" />;
-  }
-
-  return <Outlet />;
-};
+    return children;
+}
 
 export default PrivateRoute;
