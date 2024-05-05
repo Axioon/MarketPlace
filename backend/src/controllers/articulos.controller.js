@@ -1,3 +1,5 @@
+//backend\src\controllers\articulos.controller.js
+
 import { createGetModelArticulo,createPostModelArticulo,putPostModelArtriculo,deletePostModelArticulo } from "../models/articulos.model.js"
 import pool from "../../db/conectionDB.js"
 
