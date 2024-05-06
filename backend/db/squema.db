@@ -67,11 +67,7 @@ VALUES ('Armado de PC a medida', 'Servicio de armado de PC personalizado segun t
 
 
 
-CREATE TABLE carrito (
-    id SERIAL PRIMARY KEY,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado VARCHAR(10)
-);
+
 
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
@@ -144,3 +140,25 @@ ALTER TABLE detalle_pedido
 ADD CONSTRAINT fk_detallepedido_articulo
 FOREIGN KEY (articulo_id) REFERENCES articulo(id)
 ON DELETE CASCADE;
+
+
+CREATE TABLE carrito (
+    id SERIAL PRIMARY KEY,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(10)
+);
+INSERT INTO carrito (estado) VALUES ('pendiente');
+
+CREATE TABLE articulo_carrito_usuario (
+    id SERIAL PRIMARY KEY,
+    articulo_id INT REFERENCES articulo(id),
+    carrito_id INT REFERENCES carrito(id),
+    usuario_id INT REFERENCES usuario(id),
+    cantidad INT, -- podrías agregar esta columna si deseas llevar un registro de la cantidad de cada artículo en el carrito
+    UNIQUE (articulo_id, carrito_id, usuario_id) -- Esta restricción garantiza que no haya duplicados
+);
+
+INSERT INTO articulo_carrito_usuario (articulo_id, carrito_id, usuario_id, cantidad)
+VALUES 
+    (1, 1, 1, 2), 
+    (2, 1, 1, 1); 
