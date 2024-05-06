@@ -7,6 +7,8 @@ import { registerUser, loginUser } from '../src/controllers/auth.controller.js';
 
 import { crearNuevoCarrito } from '../src/controllers/carritoController.js';
 import { agregarArticuloAlCarrito } from '../src/controllers/articuloCarritoUsuarioController.js';
+import { obtenerUsuarios } from '../src/controllers/auth.controller.js';
+
 
 const router = express.Router();
 
@@ -17,6 +19,8 @@ router.delete('/articulo/:id',deletePost)
 
 
 router.post('/auth/register', registerUser);
+router.get('/usuarios', obtenerUsuarios);
+
 
 router.post('/auth/login', loginUser);
 

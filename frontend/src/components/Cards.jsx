@@ -20,19 +20,16 @@ const Cards = () => {
     // No necesitas limpiar los efectos en este caso
   }, [apiCall]);
 
-  const handleAgregarAlCarrito = async (product) => {
-    // Realizar la operación de agregar al carrito
+  const handleAgregarAlCarrito = async (product, usuarioId) => {
     try {
-      const success = await agregarAlCarrito(product.id, usuarioId, carritoId); // Ajusta los argumentos según tu lógica de usuario y carrito
-      if (success) {
-        console.log('Producto agregado al carrito en la base de datos');
-      } else {
-        console.error('Error al agregar el producto al carrito en la base de datos');
-      }
+      // Realizar la solicitud POST para agregar el producto al carrito en la base de datos
+      const response = await apiCall('post', '/agregar-al-carrito', { ...product, usuarioId });
+      console.log('Producto agregado al carrito en la base de datos:', response);
     } catch (error) {
-      console.error('Error al agregar el producto al carrito:', error);
+      console.error('Error al agregar el producto al carrito en la base de datos:', error);
     }
   };
+  
 
   return (
     <div className="container mx-auto py-8">

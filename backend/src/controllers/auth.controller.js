@@ -33,6 +33,16 @@ export const registerUser = [
         }
     }
 ];
+export const obtenerUsuarios = async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM usuario');
+      res.status(200).json(result.rows);
+    } catch (error) {
+      console.error('Error al obtener usuarios:', error);
+      res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+    }
+  };
+
 
 // Inicio de sesión de usuario
 export const loginUser = [
