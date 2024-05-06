@@ -1,8 +1,8 @@
-import { Fragment, useState } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 
 const navigation = {
   categories: [
@@ -58,6 +58,14 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const { authUser, setAuthUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setAuthUser(null);  // Limpiar el estado de autenticación
+    localStorage.removeItem('jwtToken');  // Remover el token de la local storage
+    navigate('/');  // Redirige al inicio o a la página que consideres
+  };
 
   return (
     <header className="relative bg-white">
@@ -102,7 +110,6 @@ export default function Navbar() {
                             {category.name}
                           </Popover.Button>
                         </div>
-
                         <Transition
                           as={Fragment}
                           enter="transition ease-out duration-200"
@@ -166,15 +173,21 @@ export default function Navbar() {
             </Popover.Group>
 
             <div className="ml-auto flex items-center">
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <Link to="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                  Sign in
-                </Link>
-                <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                  Create account
-                </Link>
-              </div>
+          {authUser ? (
+            <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
+              Cerrar sesión
+            </button>
+          ) : (
+            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+              <Link to="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                Sign in
+              </Link>
+              <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+              <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                Create account
+              </Link>
+            </div>
+          )}
               {/* Search */}
               <div className="flex lg:ml-6">
                 <Link to="/search" className="p-2 text-gray-400 hover:text-gray-500">
