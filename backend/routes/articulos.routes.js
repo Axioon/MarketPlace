@@ -5,6 +5,9 @@ import { getArticulo,createPost,deletePost,putPost } from "../src/controllers/ar
 import { obtenerArticulosConOferta } from '../src/controllers/articulo.oferta.controller.js';
 import { registerUser, loginUser } from '../src/controllers/auth.controller.js';
 
+import { crearNuevoCarrito } from '../src/controllers/carritoController.js';
+import { agregarArticuloAlCarrito } from '../src/controllers/articuloCarritoUsuarioController.js';
+
 const router = express.Router();
 
 router.get('/articulo',getArticulo)
@@ -19,5 +22,8 @@ router.post('/auth/login', loginUser);
 
 
 router.get('/articulos-con-oferta', obtenerArticulosConOferta);
+
+router.post('/carrito', crearNuevoCarrito)
+router.post('/articulo-carrito-usuario', agregarArticuloAlCarrito);
 
 export default router

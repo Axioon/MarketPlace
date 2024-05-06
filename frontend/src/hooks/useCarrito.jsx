@@ -1,43 +1,35 @@
-import { useContext } from "react";
-import { CarritoContext } from "../context/CarritoProvider.jsx";
+import { useState } from "react";
 
 export function useCarrito() {
-  const { carrito, setCarrito } = useContext(CarritoContext);
+  const [error, setError] = useState(null);
 
-  // Si el carrito es nulo o indefinido, inicialízalo como un array vacío
-  const carritoActualizado = carrito || [];
-
-  // Función para agregar un artículo al carrito del usuario
-  const agregarAlCarrito = async (articulo, usuarioId, carritoId) => {
+  const crearCarrito = async () => {
     try {
-      const response = await fetch('tu_api/agregar-al-carrito', {
+      const response = await fetch('tu_api/crear-carrito', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          articuloId: articulo.id,
-          usuarioId: usuarioId,
-          carritoId: carritoId
-        }),
+        body: JSON.stringify({ estado: 'pendiente' }),
       });
 
       if (!response.ok) {
-        throw new Error('No se pudo agregar el artículo al carrito');
+        throw new Error('No se pudo crear el carrito');
       }
 
-      // Actualizar el estado local del carrito si es necesario
-      // setCarrito([...carrito, articulo]);
+      const data = await response.json();
+      return data.carrito;
     } catch (error) {
-      console.error('Error al agregar el artículo al carrito:', error);
+      setError('Error al crear el carrito');
+      console.error('Error al crear el carrito:', error);
+      return null;
     }
   };
 
-  // Función para eliminar un artículo del carrito del usuario
-  const eliminarDelCarrito = async (articuloId, usuarioId, carritoId) => {
+  const agregarAlCarrito = async (articuloId, usuarioId, carritoId) => {
     try {
-      const response = await fetch('tu_api/eliminar-del-carrito', {
-        method: 'DELETE',
+      const response = await fetch('tu_api/agregar-al-carrito-usuario', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -49,41 +41,20 @@ export function useCarrito() {
       });
 
       if (!response.ok) {
-        throw new Error('No se pudo eliminar el artículo del carrito');
+        throw new Error('No se pudo agregar el artículo al carrito');
       }
 
-      // Actualizar el estado local del carrito si es necesario
-      // const updatedCarrito = carrito.filter(item => item.id !== articuloId);
-      // setCarrito(updatedCarrito);
+      return true;
     } catch (error) {
-      console.error('Error al eliminar el artículo del carrito:', error);
-    }
-  };
-
-  // Función para obtener los artículos del carrito del usuario
-  const obtenerArticulosDelCarrito = async (usuarioId, carritoId) => {
-    try {
-      const response = await fetch(`tu_api/obtener-articulos-del-carrito?usuarioId=${usuarioId}&carritoId=${carritoId}`);
-
-      if (!response.ok) {
-        throw new Error('No se pudieron obtener los artículos del carrito');
-      }
-
-      const data = await response.json();
-      return data.articulos;
-    } catch (error) {
-      console.error('Error al obtener los artículos del carrito:', error);
-      return [];
+      setError('Error al agregar el artículo al carrito');
+      console.error('Error al agregar el artículo al carrito:', error);
+      return false;
     }
   };
 
   return { 
-    carrito: carritoActualizado, 
-    setCarrito,
+    crearCarrito,
     agregarAlCarrito,
-    eliminarDelCarrito,
-    obtenerArticulosDelCarrito
+    error
   };
 }
-
-export default useCarrito;

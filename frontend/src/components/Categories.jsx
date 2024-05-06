@@ -1,9 +1,10 @@
-// Categories.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useCarrito } from '../hooks/useCarrito';
 
 function Categories({ category }) {
     const [articles, setArticles] = useState([]);
+    const { agregarAlCarrito } = useCarrito();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +21,19 @@ function Categories({ category }) {
         fetchData();
     }, [category.id]);
 
+    const handleAgregarAlCarrito = async (producto) => {
+        try {
+            const success = await agregarAlCarrito(producto.id, usuarioId, carritoId); // Ajusta los argumentos según tu lógica de usuario y carrito
+            if (success) {
+                console.log('Producto agregado al carrito');
+            } else {
+                console.error('Error al agregar el producto al carrito');
+            }
+        } catch (error) {
+            console.error('Error al agregar el producto al carrito:', error);
+        }
+    };
+
     const ArticleGrid = ({ articles }) => (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {articles.map(producto => (
@@ -29,7 +43,7 @@ function Categories({ category }) {
                         <h2 className="text-xl font-semibold mb-2">{producto.nombre}</h2>
                         <p className="text-gray-700 mb-2">Descripción: {producto.descripcion}</p>
                         <p className="text-gray-700 mb-2">Precio: ${producto.precio}</p>
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Agregar al carrito</button>
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" onClick={() => handleAgregarAlCarrito(producto)}>Agregar al carrito</button>
                     </div>
                 </div>
             ))}

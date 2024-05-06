@@ -1,51 +1,36 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useAxios from '../hooks/useAxios.jsx';
-import useCarrito from '../hooks/useCarrito.jsx';
+import { useCarrito } from '../hooks/useCarrito.jsx';
 
 const Cards = () => {
   const { apiCall } = useAxios();
   const [products, setProducts] = useState([]);
-  const { carrito, setCarrito } = useCarrito();
+  const { agregarAlCarrito } = useCarrito();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseData = await apiCall('get', '/articulos-con-oferta');
-        console.log(responseData);
         setProducts(responseData);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-    return () => {
-      // Limpia los efectos si es necesario
-    };
+    // No necesitas limpiar los efectos en este caso
   }, [apiCall]);
 
   const handleAgregarAlCarrito = async (product) => {
-    // Verificar si el producto ya existe en el carrito por su ID
-    const existingProduct = carrito.find(item => item.id === product.id);
-    if (existingProduct) {
-      // Si el producto ya está en el carrito, actualiza su cantidad
-      const updatedCarrito = carrito.map(item => {
-        if (item.id === product.id) {
-          return { ...item, cantidad: item.cantidad + 1 };
-        }
-        return item;
-      });
-      setCarrito(updatedCarrito);
-    } else {
-      // Si el producto no está en el carrito, agrégalo con una cantidad inicial de 1
-      setCarrito(prevCarrito => [...prevCarrito, { ...product, cantidad: 1 }]);
-    }
-
-    // Realizar la solicitud POST para agregar el producto al carrito en la base de datos
+    // Realizar la operación de agregar al carrito
     try {
-      const response = await apiCall('post', '/agregar-al-carrito', product);
-      console.log('Producto agregado al carrito en la base de datos:', response);
+      const success = await agregarAlCarrito(product.id, usuarioId, carritoId); // Ajusta los argumentos según tu lógica de usuario y carrito
+      if (success) {
+        console.log('Producto agregado al carrito en la base de datos');
+      } else {
+        console.error('Error al agregar el producto al carrito en la base de datos');
+      }
     } catch (error) {
-      console.error('Error al agregar el producto al carrito en la base de datos:', error);
+      console.error('Error al agregar el producto al carrito:', error);
     }
   };
 
