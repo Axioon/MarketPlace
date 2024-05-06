@@ -1,21 +1,6 @@
 // backend/src/controllers/auth.controller.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-<<<<<<< Updated upstream
-import pool from '../../db/conectionDB.js';
- // Asegúrate de que la ruta es correcta
-
-export const registerUser = async (req, res) => {
-    const { nombre, correo_electronico, contraseña, direccion, telefono, rol_id } = req.body;
-    const hashedPassword = bcrypt.hashSync(contraseña, 10);
-    
-    try {
-      await pool.query('INSERT INTO usuario (nombre, correo_electronico, contrasena, direccion, telefono, rol_id) VALUES ($1, $2, $3, $4, $5, $6)', 
-        [nombre, correo_electronico, hashedPassword, direccion, telefono, rol_id]);
-      res.status(201).send('Usuario registrado con éxito.');
-    } catch (error) {
-      res.status(500).send('Error al registrar el usuario.');
-=======
 import { body, validationResult } from 'express-validator';
 import pool from '../../db/conectionDB.js'; // Asegúrate de que la ruta es correcta
 
@@ -46,9 +31,8 @@ export const registerUser = [
             console.log('Error al registrar el usuario:', error);  // Imprime detalles del error de base de datos
             res.status(500).send('Error al registrar el usuario: ' + error.message);
         }
->>>>>>> Stashed changes
     }
-};
+];
 
 export const loginUser = async (req, res) => {
     const { correo_electronico, contrasena } = req.body;
