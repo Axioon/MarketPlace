@@ -15,34 +15,17 @@ const navigation = {
         {
           id: 'hardware',
           name: 'Hardware',
-          items: [
-            { name: 'Tarjeta de Video', to: '/hardware/tarjeta-de-video' },
-            { name: 'Procesadores', to: '/hardware/procesadores' },
-            { name: 'Placa Madre', to: '/hardware/placa-madre' },
-            { name: 'Ram', to: '/hardware/ram' },
-            { name: 'Disco Duro', to: '/hardware/disco-duro' },
-            { name: 'Gabinete', to: '/hardware/gabinete' },
-            { name: 'Fuente de', to: '/hardware/fuente-de' },
-          ],
+          to: '/hardware',
         },
         {
           id: 'accesorios',
           name: 'Accesorios',
-          items: [
-            { name: 'Mouse', to: '/accesorios/mouse' },
-            { name: 'Teclado', to: '/accesorios/teclado' },
-            { name: 'Monitor', to: '/accesorios/monitor' },
-            { name: 'Audífonos', to: '/accesorios/audifonos' },
-          ],
+          to: '/accesorios',
         },
         {
           id: 'desarrollo',
           name: 'Desarrollo de Software',
-          items: [
-            { name: 'Creacion Paginas Web', to: '/desarrollo/creacion-paginas-web' },
-            { name: 'Creacion App Mobile', to: '/desarrollo/creacion-app-mobile' },
-            { name: 'Consultoria Informatica', to: '/desarrollo/consultoria-informatica' },
-          ],
+          to: '/desarrollo',
         },
       ],
     },
@@ -96,7 +79,7 @@ export default function Navbar() {
 
             {/* Flyout menus */}
             <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-              <div className="flex h-full space-x-8">
+              <div className="flex h-full space-x-4">
                 {navigation.categories.map((category) => (
                   <Popover key={category.name} className="flex">
                     {({ open }) => (
@@ -132,22 +115,9 @@ export default function Navbar() {
                                   <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                     {category.sections.map((section) => (
                                       <div key={section.name}>
-                                        <p id={`${section.name}-heading`} className="font-medium text-gray-900">
+                                        <Link to={section.to} className="font-medium text-gray-900">
                                           {section.name}
-                                        </p>
-                                        <ul
-                                          role="list"
-                                          aria-labelledby={`${section.name}-heading`}
-                                          className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                        >
-                                          {section.items.map((item) => (
-                                            <li key={item.name} className="flex">
-                                              <Link to={item.to} className="hover:text-gray-800">
-                                                {item.name}
-                                              </Link>
-                                            </li>
-                                          ))}
-                                        </ul>
+                                        </Link>
                                       </div>
                                     ))}
                                   </div>

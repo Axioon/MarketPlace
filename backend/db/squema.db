@@ -21,7 +21,7 @@ INSERT INTO categoria (nombre) VALUES ('software');
 
 CREATE TABLE articulo (
     id SERIAL PRIMARY KEY, 
-    nombre VARCHAR(25) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(300) NOT NULL,
     categoria_id INT REFERENCES categoria(id),
     precio DECIMAL(10, 2) NOT NULL,
@@ -30,29 +30,42 @@ CREATE TABLE articulo (
 );
 
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Tarjeta Gráfica GTX 1080', 'Potente tarjeta gráfica para gaming', 1, 499.99, 10, 'url_imagen'),
-    ('Tarjeta Gráfica RTX 2080 Ti', 'Alto rendimiento para juegos de última generación', 1, 799.99, 5, 'url_imagen'),
-    ('Tarjeta Gráfica AMD Radeon RX 6800', 'Tarjeta gráfica de gama alta para jugadores exigentes', 1, 649.99, 8, 'url_imagen');
+    ('Tarjeta Grafica GTX 1080', 'Potente tarjeta grafica para gaming', 1, 499.99, 10, 'url_imagen'),
+    ('Tarjeta Grafica RTX 2080 Ti', 'Alto rendimiento para juegos de ultima generacion', 1, 799.99, 5, 'url_imagen'),
+    ('Tarjeta Grafica AMD Radeon RX 6800', 'Tarjeta grafica de gama alta para jugadores exigentes', 1, 649.99, 8, 'url_imagen');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
     ('Procesador Intel Core i9-9900K', 'Procesador de alto rendimiento para aplicaciones exigentes', 1, 399.99, 15, 'url_imagen'),
     ('Procesador AMD Ryzen 9 5900X', 'Procesador de alto rendimiento para gaming y multitarea', 1, 549.99, 10, 'url_imagen'),
     ('Procesador Intel Core i7-10700K', 'Procesador potente para juegos y aplicaciones de productividad', 1, 349.99, 12, 'url_imagen');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
     ('Placa Base ASUS ROG Strix Z390-E', 'Placa base de alta gama para entusiastas de PC', 1, 259.99, 20, 'url_imagen'),
-    ('Placa Base MSI B450 TOMAHAWK MAX', 'Placa base sólida y confiable para sistemas de nivel medio', 1, 139.99, 25, 'url_imagen'),
+    ('Placa Base MSI B450 TOMAHAWK MAX', 'Placa base solida y confiable para sistemas de nivel medio', 1, 139.99, 25, 'url_imagen'),
     ('Placa Base Gigabyte B550 AORUS ELITE', 'Placa base con soporte para PCIe 4.0 y diseño robusto', 1, 189.99, 18, 'url_imagen');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
     ('Memoria RAM Corsair Vengeance LPX 16GB', 'Memoria RAM DDR4 de alta velocidad', 1, 89.99, 30, 'url_imagen'),
-    ('Memoria RAM G.SKILL Trident Z RGB 32GB', 'Memoria RAM DDR4 de alta capacidad con iluminación RGB', 1, 169.99, 15, 'url_imagen'),
-    ('Memoria RAM HyperX Fury 8GB', 'Memoria RAM DDR4 confiable y económica', 1, 49.99, 20, 'url_imagen');
+    ('Memoria RAM G.SKILL Trident Z RGB 32GB', 'Memoria RAM DDR4 de alta capacidad con iluminacion RGB', 1, 169.99, 15, 'url_imagen'),
+    ('Memoria RAM HyperX Fury 8GB', 'Memoria RAM DDR4 confiable y economica', 1, 49.99, 20, 'url_imagen');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
     ('Disco Duro SSD Samsung 970 EVO 1TB', 'Almacenamiento SSD de alta velocidad y capacidad', 1, 179.99, 25, 'url_imagen'),
     ('Disco Duro SSD Crucial MX500 500GB', 'Disco SSD confiable y de alto rendimiento', 1, 89.99, 20, 'url_imagen'),
-    ('Disco Duro SSD Western Digital Blue 1TB', 'Almacenamiento SSD rápido y duradero', 1, 99.99, 30, 'url_imagen');
+    ('Disco Duro SSD Western Digital Blue 1TB', 'Almacenamiento SSD rapido y duradero', 1, 99.99, 30, 'url_imagen');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
     ('Gabinete NZXT H510', 'Gabinete moderno y elegante para tu PC', 1, 99.99, 40, 'url_imagen'),
-    ('Gabinete Corsair Crystal 570X RGB', 'Gabinete con paneles de vidrio templado y efectos de iluminación RGB', 1, 199.99, 12, 'url_imagen'),
-    ('Gabinete Cooler Master MasterBox Q300L', 'Diseño compacto y versátil para construcciones de PC', 1, 59.99, 35, 'url_imagen');
+    ('Gabinete Corsair Crystal 570X RGB', 'Gabinete con paneles de vidrio templado y efectos de iluminacion RGB', 1, 199.99, 12, 'url_imagen'),
+    ('Gabinete Cooler Master MasterBox Q300L', 'Diseno compacto y versatil para construcciones de PC', 1, 59.99, 35, 'url_imagen');
+
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Mouse Gaming', 'Mouse disenado para jugadores exigentes', 2, 29.99, 20, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Teclado Mecanico RGB', 'Teclado mecanico con retroiluminacion RGB personalizable', 2, 79.99, 15, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Mousepad Grande', 'Mousepad extra grande para movimientos suaves del raton', 2, 19.99, 30, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Auriculares Inalambricos', 'Auriculares inalambricos con calidad de sonido premium', 2, 99.99, 10, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Microfono de Condensador', 'Microfono de condensador para grabaciones profesionales', 2, 129.99, 8, 'url_imagen');
+
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Revision de PC', 'Servicio de revision y mantenimiento de PC', 3, 49.99, 15, 'url_imagen');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Armado de PC a medida', 'Servicio de armado de PC personalizado segun tus necesidades', 3, 99.99, 10, 'url_imagen');
+
+
 
 CREATE TABLE carrito (
     id SERIAL PRIMARY KEY,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthProvider';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from "./views/Home";
@@ -8,10 +9,11 @@ import SignIn from './views/SingIn';
 import Contact from './views/Contact';
 import Nosotros from './views/Nosotros';
 import Shop from './views/Shop';
-import Articles from './views/Articles';
-import { AuthProvider } from './context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute';
 import AdminDashboard from './views/Admin/AdminDashboard';
+import Accesorios from './views/Accesorios';
+import Software from './views/Software';
+import Hardware from './views/Hardware';
 import './App.css';
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
             <Route path="/contacto" element={<Contact />} />
             <Route path="/acerca-de-nosotros" element={<Nosotros />} />
             <Route path="/cart" element={<Shop />} />
-            <Route path="/hardware/tarjeta-de-video" element={<Articles />} />
+            <Route path="/hardware" element={<Hardware />} />
+            <Route path="/accesorios" element={<Accesorios />} />
+            <Route path="/desarrollo" element={<Software />} />
             <Route path="/admin/*" element={<PrivateRoute roleRequired={1}>
               <AdminDashboard />
             </PrivateRoute>} />
