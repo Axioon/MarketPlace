@@ -12,8 +12,7 @@ INSERT INTO rol (nombre) VALUES ('Invitado');
 CREATE TABLE categoria (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25)
-)
-;
+);
 
 INSERT INTO categoria (nombre) VALUES ('hardware');
 INSERT INTO categoria (nombre) VALUES ('accesorios');
@@ -30,40 +29,45 @@ CREATE TABLE articulo (
 );
 
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Tarjeta Grafica GTX 1080', 'Potente tarjeta grafica para gaming', 1, 499.99, 10, 'url_imagen'),
-    ('Tarjeta Grafica RTX 2080 Ti', 'Alto rendimiento para juegos de ultima generacion', 1, 799.99, 5, 'url_imagen'),
-    ('Tarjeta Grafica AMD Radeon RX 6800', 'Tarjeta grafica de gama alta para jugadores exigentes', 1, 649.99, 8, 'url_imagen');
+    ('Tarjeta Grafica GTX 1080', 'Potente tarjeta grafica para gaming', 1, 499.99, 10, 'https://static.gigabyte.com/StaticFile/Image/Global/10b31e4064d3a7542b989b83b47ab349/Product/18113/png/500'),
+    ('Tarjeta Grafica RTX 2080 Ti', 'Alto rendimiento para juegos de ultima generacion', 1, 799.99, 5, 'https://m.media-amazon.com/images/I/8188NNMGDOL._AC_UF894,1000_QL80_.jpg'),
+    ('Tarjeta Grafica AMD Radeon RX 6800', 'Tarjeta grafica de gama alta para jugadores exigentes', 1, 649.99, 8, 'https://sipoonline.cl/wp-content/uploads/2023/06/Tarjeta-de-Video-Gigabyte-Radeon-RX-6800-Gaming-OC-16GB-GDDR6-PCIe-4.0.jpg');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Procesador Intel Core i9-9900K', 'Procesador de alto rendimiento para aplicaciones exigentes', 1, 399.99, 15, 'url_imagen'),
-    ('Procesador AMD Ryzen 9 5900X', 'Procesador de alto rendimiento para gaming y multitarea', 1, 549.99, 10, 'url_imagen'),
-    ('Procesador Intel Core i7-10700K', 'Procesador potente para juegos y aplicaciones de productividad', 1, 349.99, 12, 'url_imagen');
+    ('Procesador Intel Core i9-9900K', 'Procesador de alto rendimiento para aplicaciones exigentes', 1, 399.99, 15, 'https://cdn3.spider.cl/14258-large_default/procesador-intel-core-i9-9900k-8-core-16-thread-36ghz-50ghz-turbo-lga1151-v2-95w-sin-fan.jpg'),
+    ('Procesador AMD Ryzen 9 5900X', 'Procesador de alto rendimiento para gaming y multitarea', 1, 549.99, 10, 'https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-9-5900x.jpg'),
+    ('Procesador Intel Core i7-10700K', 'Procesador potente para juegos y aplicaciones de productividad', 1, 349.99, 12, 'https://gigaclic.cl/wp-content/uploads/2021/09/intel-core-i7-10700k-380-ghz.jpg');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Placa Base ASUS ROG Strix Z390-E', 'Placa base de alta gama para entusiastas de PC', 1, 259.99, 20, 'url_imagen'),
-    ('Placa Base MSI B450 TOMAHAWK MAX', 'Placa base solida y confiable para sistemas de nivel medio', 1, 139.99, 25, 'url_imagen'),
-    ('Placa Base Gigabyte B550 AORUS ELITE', 'Placa base con soporte para PCIe 4.0 y diseño robusto', 1, 189.99, 18, 'url_imagen');
+    ('Placa Base ASUS ROG Strix Z390-E', 'Placa base de alta gama para entusiastas de PC', 1, 259.99, 20, 'https://media.solotodo.com/media/products/836132_picture_1542614352.png'),
+    ('Placa Base MSI B450 TOMAHAWK MAX', 'Placa base solida y confiable para sistemas de nivel medio', 1, 139.99, 25, 'https://asset.msi.com/resize/image/global/product/product_1_20200806161944_5f2bbd20c4441.png62405b38c58fe0f07fcef2367d8a9ba1/600.png'),
+    ('Placa Base Gigabyte B550 AORUS ELITE', 'Placa base con soporte para PCIe 4.0 y diseño robusto', 1, 189.99, 18, 'https://www.winpy.cl/files/w21114_b550_aorus_elite_v2_1.jpg');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Memoria RAM Corsair Vengeance LPX 16GB', 'Memoria RAM DDR4 de alta velocidad', 1, 89.99, 30, 'url_imagen'),
-    ('Memoria RAM G.SKILL Trident Z RGB 32GB', 'Memoria RAM DDR4 de alta capacidad con iluminacion RGB', 1, 169.99, 15, 'url_imagen'),
-    ('Memoria RAM HyperX Fury 8GB', 'Memoria RAM DDR4 confiable y economica', 1, 49.99, 20, 'url_imagen');
+    ('Memoria RAM Corsair Vengeance LPX 16GB', 'Memoria RAM DDR4 de alta velocidad', 1, 89.99, 30, 'https://http2.mlstatic.com/D_NQ_NP_796986-MLA48281933778_112021-O.webp'),
+    ('Memoria RAM G.SKILL Trident Z RGB 32GB', 'Memoria RAM DDR4 de alta capacidad con iluminacion RGB', 1, 169.99, 15, 'https://media.spdigital.cl/thumbnails/products/1rzkz57j_4c473a83_thumbnail_512.jpg'),
+    ('Memoria RAM HyperX Fury 8GB', 'Memoria RAM DDR4 confiable y economica', 1, 49.99, 20, 'https://dojiw2m9tvv09.cloudfront.net/16157/product/hx426c16fb388168.jpg');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Disco Duro SSD Samsung 970 EVO 1TB', 'Almacenamiento SSD de alta velocidad y capacidad', 1, 179.99, 25, 'url_imagen'),
-    ('Disco Duro SSD Crucial MX500 500GB', 'Disco SSD confiable y de alto rendimiento', 1, 89.99, 20, 'url_imagen'),
-    ('Disco Duro SSD Western Digital Blue 1TB', 'Almacenamiento SSD rapido y duradero', 1, 99.99, 30, 'url_imagen');
+    ('Disco Duro SSD Samsung 970 EVO 1TB', 'Almacenamiento SSD de alta velocidad y capacidad', 1, 179.99, 25, 'https://media.spdigital.cl/thumbnails/products/tmp5cholg2c_916514d9_thumbnail_4096.jpg'),
+    ('Disco Duro SSD Crucial MX500 500GB', 'Disco SSD confiable y de alto rendimiento', 1, 89.99, 20, 'https://http2.mlstatic.com/D_NQ_NP_607768-MLU75918045896_042024-O.webp'),
+    ('Disco Duro SSD Western Digital Blue 1TB', 'Almacenamiento SSD rapido y duradero', 1, 99.99, 30, 'https://falabella.scene7.com/is/image/Falabella/gsc_115252251_1058557_1?wid=800&hei=800&qlt=70');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES 
-    ('Gabinete NZXT H510', 'Gabinete moderno y elegante para tu PC', 1, 99.99, 40, 'url_imagen'),
-    ('Gabinete Corsair Crystal 570X RGB', 'Gabinete con paneles de vidrio templado y efectos de iluminacion RGB', 1, 199.99, 12, 'url_imagen'),
-    ('Gabinete Cooler Master MasterBox Q300L', 'Diseno compacto y versatil para construcciones de PC', 1, 59.99, 35, 'url_imagen');
-
-INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Mouse Gaming', 'Mouse disenado para jugadores exigentes', 2, 29.99, 20, 'url_imagen');
-INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Teclado Mecanico RGB', 'Teclado mecanico con retroiluminacion RGB personalizable', 2, 79.99, 15, 'url_imagen');
-INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Mousepad Grande', 'Mousepad extra grande para movimientos suaves del raton', 2, 19.99, 30, 'url_imagen');
-INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Auriculares Inalambricos', 'Auriculares inalambricos con calidad de sonido premium', 2, 99.99, 10, 'url_imagen');
-INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) VALUES ('Microfono de Condensador', 'Microfono de condensador para grabaciones profesionales', 2, 129.99, 8, 'url_imagen');
+    ('Gabinete NZXT H510', 'Gabinete moderno y elegante para tu PC', 1, 99.99, 40, 'https://media.spdigital.cl/thumbnails/products/6xl7evup_7b40e13b_thumbnail_512.jpg'),
+    ('Gabinete Corsair Crystal 570X RGB', 'Gabinete con paneles de vidrio templado y efectos de iluminacion RGB', 1, 199.99, 12, 'https://http2.mlstatic.com/D_NQ_NP_899966-MLC44738715560_012021-O.webp'),
+    ('Gabinete Cooler Master MasterBox Q300L', 'Diseno compacto y versatil para construcciones de PC', 1, 59.99, 35, 'https://centrale.cl/wp-content/uploads/Cooler-Master-Gabinete-Gamer-Masterbox-Q300L-Rainbow-Micro-Atx-Panel-Acrilico.webp');
 
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
-VALUES ('Revision de PC', 'Servicio de revision y mantenimiento de PC', 3, 49.99, 15, 'url_imagen');
+VALUES ('Logitech G203 Prodigy Mouse Gaming', 'Mouse disenado para jugadores exigentes', 2, 29.99, 20, 'https://falabella.scene7.com/is/image/Falabella/8609163_4?wid=800&hei=800&qlt=70');
 INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
-VALUES ('Armado de PC a medida', 'Servicio de armado de PC personalizado segun tus necesidades', 3, 99.99, 10, 'url_imagen');
+VALUES ('Corsair K70 RGB Teclado Mecanico RGB', 'Teclado mecanico con retroiluminacion RGB personalizable', 2, 79.99, 15, 'https://etchile.net/wp-content/uploads/2023/07/corsair_K70-RGB-TKL-champion-series_04.jpg');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('SteelSeries QcK Prism Mousepad Grande', 'Mousepad extra grande para movimientos suaves del raton', 2, 19.99, 30, 'https://media.spdigital.cl/thumbnails/products/tmp4nys8sqv_e5fad185_thumbnail_512.jpg');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Sony WH-1000XM4 Auriculares Inalambricos', 'Auriculares inalambricos con calidad de sonido premium', 2, 99.99, 10, 'https://http2.mlstatic.com/D_NQ_NP_832738-MLA51077928930_082022-O.webp');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Audio-Technica AT2020USB+ Microfono de Condensador', 'Microfono de condensador para grabaciones profesionales', 2, 129.99, 8, 'https://www.fluteservice.cl/wp-content/uploads/2022/03/AT2020.jpg');
+
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Revision de PC', 'Servicio de revision y mantenimiento de PC', 3, 49.99, 15, 'https://pcvgrupo.com/wp-content/uploads/2022/07/Rapara-tu-ordenador-servicio-tecnico_1920-e1657705958239-1920x1080.jpg');
+INSERT INTO articulo (nombre, descripcion, categoria_id, precio, stock, img) 
+VALUES ('Armado de PC a medida', 'Servicio de armado de PC personalizado segun tus necesidades', 3, 99.99, 10, 'https://cdnx.jumpseller.com/ultimate-gamer-store/image/30899218/resize/540/540?1673708139');
 
 
 
