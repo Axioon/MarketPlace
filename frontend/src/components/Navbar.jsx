@@ -3,6 +3,7 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import { Modal } from '../components/Modal.jsx';
 
 const navigation = {
   categories: [
@@ -174,9 +175,17 @@ export default function Navbar() {
 
             <div className="ml-auto flex items-center">
           {authUser ? (
-            <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
+            <>
+               <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
               Cerrar sesión
             </button>
+
+              <Modal/>
+            
+            
+            </>
+         
+            
           ) : (
             <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
               <Link to="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
