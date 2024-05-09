@@ -16,6 +16,7 @@ import Software from './views/Software';
 import Hardware from './views/Hardware';
 import './App.css';
 
+   
 function App() {
   return (
     <AuthProvider>
