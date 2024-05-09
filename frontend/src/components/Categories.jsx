@@ -23,7 +23,7 @@ function Categories({ category }) {
 
     const handleAgregarAlCarrito = async (producto) => {
         try {
-            const success = await agregarAlCarrito(producto.id, usuarioId, carritoId); // Ajusta los argumentos según tu lógica de usuario y carrito
+            const success = await agregarAlCarrito(producto.id, usuarioId, carritoId); 
             if (success) {
                 console.log('Producto agregado al carrito');
             } else {
@@ -43,16 +43,19 @@ function Categories({ category }) {
                         <h2 className="text-xl font-semibold mb-2">{producto.nombre}</h2>
                         <p className="text-gray-700 mb-2">Descripción: {producto.descripcion}</p>
                         <p className="text-gray-700 mb-2">Precio: ${producto.precio}</p>
+                        <div className="flex justify-center">
                         <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" onClick={() => handleAgregarAlCarrito(producto)}>Agregar al carrito</button>
+                        </div>
                     </div>
                 </div>
             ))}
         </div>
+
     );
 
     return (
         <div className="container mx-auto mt-8">
-            <h1 className="text-3xl font-bold mb-4">Categoría: {category.name}</h1>
+            <h1 className="text-3xl font-bold mb-8">Categoría: {category.name}</h1>
             <ArticleGrid articles={articles} />
         </div>
     );
