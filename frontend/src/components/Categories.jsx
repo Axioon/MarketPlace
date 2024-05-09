@@ -38,7 +38,7 @@ function Categories({ category }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {articles.map(producto => (
                 <div key={producto.id} className="bg-white rounded-lg shadow-md">
-                    <img src={producto.img} alt={producto.nombre} className="w-full h-64 object-cover object-center rounded-t-lg" />
+                    <img src={producto.img} alt={producto.nombre} className="w-full h-80 object-cover object-center rounded-t-lg" />
                     <div className="p-4">
                         <h2 className="text-xl font-semibold mb-2">{producto.nombre}</h2>
                         <p className="text-gray-700 mb-2">Descripción: {producto.descripcion}</p>
