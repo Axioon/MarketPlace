@@ -55,7 +55,7 @@ function Categories({ category }) {
 
     return (
         <div className="container mx-auto mt-8">
-            <h1 className="text-3xl font-bold mb-8">Categoría: {category.name}</h1>
+            <h1 className="text-3xl font-bold mb-8">{category.name}</h1>
             <ArticleGrid articles={articles} />
         </div>
     );
