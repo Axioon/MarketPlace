@@ -1,0 +1,11 @@
+services:
+  - name: backend
+    env: node
+    buildCommand: npm install
+    buildDir: backend
+
+  - name: frontend
+    env: node
+    buildCommand: npm install
+    buildDir: frontend
+    
