@@ -245,7 +245,7 @@ export default function Navbar() {
                   <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
                   </Link>
-                  <Modal className="mr-5" />
+          
                 </div>
               )}
 
@@ -255,9 +255,14 @@ export default function Navbar() {
                   <span className="sr-only">Search</span>
                   <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                 </Link>
+
               </div>
 
-              {/* Cart */}
+              {authUser === null || authUser ? ( // Mostrar el Modal si el usuario no está autenticado o si está autenticado
+  <Modal className="mr-5" />
+) : (
+  <></>
+)}
             </div>
           </div>
         </div>
