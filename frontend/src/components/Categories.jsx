@@ -4,7 +4,7 @@ import { useCarrito } from '../hooks/useCarrito';
 
 function Categories({ category }) {
     const [articles, setArticles] = useState([]);
-    const { carrito, agregarAlCarrito } = useCarrito();
+    const { carrito, agregarAlCarrito} = useCarrito();
 
     useEffect(() => {
         const fetchData = async () => {

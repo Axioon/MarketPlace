@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useCarrito } from '../hooks/useCarrito';
 import '../assets/CSS/styleCarrito.css';
 
 export function Modal() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  const { carrito, agregarAlCarrito } = useCarrito();
+  const { carrito, agregarAlCarrito, eliminarDelCarrito, eliminarTodoElCarrito } = useCarrito();
 
   const toggleModal = () => {
     setModalAbierto(!modalAbierto);
@@ -16,8 +16,24 @@ export function Modal() {
   };
 
   const handleQuitarProducto = (productoId) => {
-    // Lógica para quitar un producto del carrito
+    eliminarDelCarrito(productoId);
   };
+
+  const handleEliminarCarrito = () => {
+    eliminarTodoElCarrito();
+  };
+
+  useEffect(() => {
+    // Cerrar el modal cuando se eliminen todos los elementos del carrito
+    if (carrito.length === 0) {
+      setModalAbierto(false);
+    }
+  }, [carrito]);
+
+  // Calcular el precio total de todos los artículos en el carrito
+  const precioTotal = carrito.reduce((total, producto) => {
+    return total + (producto.precio * producto.cantidad);
+  }, 0);
 
   return (
     <>
@@ -30,12 +46,13 @@ export function Modal() {
       {modalAbierto && (
         <aside className="Modal">
           <div className="Modal-content">
-            <ul>
+            <ul className="Modal-list">
               {carrito.map(producto => (
                 <li key={producto.id}>
                   <img src={producto.img} alt={producto.nombre} />
                   <footer> 
                     <small className="text-white">{producto.nombre}</small>
+                    <small className="text-white">Precio: ${Number((producto.precio * producto.cantidad).toFixed(2))}</small>
                     <small className="text-white">Cantidad: {producto.cantidad}</small>
                     <button onClick={() => handleAgregarProducto(producto)} className=" bg-green-400">+</button>
                     <button onClick={() => handleQuitarProducto(producto.id)} className=" bg-red-400">-</button>
@@ -43,7 +60,11 @@ export function Modal() {
                 </li>
               ))}
             </ul>
-            <button>Limpiar</button>
+            <div className="Modal-footer">
+              <p className="text-white   border-l-neutral-200">Precio Total: ${precioTotal.toFixed(2)}</p>
+              <button onClick={handleEliminarCarrito} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Limpiar</button>
+              <button className="bg-green-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">Comprar</button>
+            </div>
           </div>
         </aside>
       )}
