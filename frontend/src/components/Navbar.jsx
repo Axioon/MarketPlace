@@ -144,13 +144,14 @@ export default function Navbar() {
             </Popover.Group>
 
             <div className="ml-auto flex items-center">
+
           {authUser ? (
             <>
                <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
               Cerrar sesión
             </button>
 
-              <Modal/>
+           
             
             
             </>
@@ -165,6 +166,8 @@ export default function Navbar() {
               <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                 Create account
               </Link>
+              
+            <Modal className= " mr-5"/>
             </div>
           )}
               {/* Search */}

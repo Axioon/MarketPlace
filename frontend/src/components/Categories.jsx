@@ -4,7 +4,7 @@ import { useCarrito } from '../hooks/useCarrito';
 
 function Categories({ category }) {
     const [articles, setArticles] = useState([]);
-    const { agregarAlCarrito } = useCarrito();
+    const { carrito, agregarAlCarrito } = useCarrito();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,12 +23,9 @@ function Categories({ category }) {
 
     const handleAgregarAlCarrito = async (producto) => {
         try {
-            const success = await agregarAlCarrito(producto.id, usuarioId, carritoId); 
-            if (success) {
-                console.log('Producto agregado al carrito');
-            } else {
-                console.error('Error al agregar el producto al carrito');
-            }
+            await agregarAlCarrito(producto); // Llama a la función para agregar al carrito
+            console.log('Producto agregado al carrito');
+            console.log('Contenido del carrito:', carrito); // Muestra el contenido del carrito después de agregar un producto
         } catch (error) {
             console.error('Error al agregar el producto al carrito:', error);
         }
@@ -44,13 +41,12 @@ function Categories({ category }) {
                         <p className="text-gray-700 mb-2">Descripción: {producto.descripcion}</p>
                         <p className="text-gray-700 mb-2">Precio: ${producto.precio}</p>
                         <div className="flex justify-center">
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" onClick={() => handleAgregarAlCarrito(producto)}>Agregar al carrito</button>
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" onClick={() => handleAgregarAlCarrito(producto)}>Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
             ))}
         </div>
-
     );
 
     return (

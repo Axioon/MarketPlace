@@ -5,7 +5,7 @@ import { useCarrito } from '../hooks/useCarrito.jsx';
 const Cards = () => {
   const { apiCall } = useAxios();
   const [products, setProducts] = useState([]);
-  const { agregarAlCarrito } = useCarrito();
+  const { agregarAlCarrito, contarArticulos } = useCarrito();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,16 +20,11 @@ const Cards = () => {
     // No necesitas limpiar los efectos en este caso
   }, [apiCall]);
 
-  const handleAgregarAlCarrito = async (product, usuarioId) => {
-    try {
-      // Realizar la solicitud POST para agregar el producto al carrito en la base de datos
-      const response = await apiCall('post', '/agregar-al-carrito', { ...product, usuarioId });
-      console.log('Producto agregado al carrito en la base de datos:', response);
-    } catch (error) {
-      console.error('Error al agregar el producto al carrito en la base de datos:', error);
-    }
+  const handleAgregarAlCarrito = (product) => {
+    agregarAlCarrito(product);
+    console.log('Producto agregado al carrito:', product);
+    console.log('Cantidad total de artículos en el carrito:', contarArticulos()); // Aquí se muestra el conteo
   };
-  
 
   return (
     <div className="container mx-auto py-8">
@@ -48,6 +43,9 @@ const Cards = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-4">
+        <p className="text-gray-700">Total de artículos en el carrito: {contarArticulos()}</p>
       </div>
     </div>
   );
