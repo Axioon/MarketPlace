@@ -84,8 +84,8 @@ export function Modal() {
           <div className="Modal-footer">
             <p className="text-white   border-l-neutral-200">Precio Total: ${precioTotal.toFixed(2)}</p>
             <button onClick={handleEliminarCarrito} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Limpiar</button>
-            <Link to={authUser ? '/checkout' : '/signIn'} className="bg-green-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">
-              {authUser ? 'Comprar' : 'Registrate'}
+            <Link to={authUser ? '/checkout' : '/signIn'} className="bg-green-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2 text-sm">
+              {authUser ? 'Comprar' : 'Inicia Sesión'}
             </Link>
           </div>
         </div>

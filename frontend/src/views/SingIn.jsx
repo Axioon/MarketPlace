@@ -1,8 +1,6 @@
-//frontend\src\views\SingIn.jsx
-
 import React, { useState, useContext } from 'react';
 import axios from '../config/axiosConfig';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Importa Link desde react-router-dom
 import { AuthContext } from '../context/AuthProvider';
 
 const SignIn = () => {
@@ -79,6 +77,9 @@ const SignIn = () => {
           Iniciar Sesión
         </button>
       </form>
+      
+      {/* Hipervínculo para registrarse */}
+      <p className="text-center mt-4">¿Aún no tienes cuenta? <Link to="/create-account" className="text-blue-500">Regístrate</Link></p>
     </div>
   );
 };
