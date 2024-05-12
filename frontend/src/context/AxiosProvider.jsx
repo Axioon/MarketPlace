@@ -5,7 +5,7 @@ export const AxiosContext = createContext();
 
 export function AxiosProvider({ children }) {
     // Obtén la URL base de la API desde una variable de entorno
-    const apiUrl = import.meta.env.VITE_REACT_APP_API_URL + '/api/v1';
+    const apiUrl = 'https://marketplace-c96w.onrender.com/api/v1';
 
 
     axios.defaults.baseURL = apiUrl;
