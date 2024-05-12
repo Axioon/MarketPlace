@@ -1,12 +1,12 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext } from 'react';
 import axios from 'axios';
 
 export const AxiosContext = createContext();
 
 export function AxiosProvider({ children }) {
-    axios.defaults.baseURL = 'https://api.render.com/deploy/srv-cp01euo21fec73ft0lh0?key=kx3HKgdsbTA';
-
- 
+    // Obtén la URL base de la API desde una variable de entorno
+    const apiUrl = import.meta.env.REACT_APP_API_URL 
+    axios.defaults.baseURL = apiUrl;
 
     const apiCall = async (method, url, data = null) => {
         try {
@@ -18,7 +18,7 @@ export function AxiosProvider({ children }) {
     };
 
     return (
-        <AxiosContext.Provider value={{  apiCall }}>
+        <AxiosContext.Provider value={{ apiCall }}>
             {children}
         </AxiosContext.Provider>
     );
