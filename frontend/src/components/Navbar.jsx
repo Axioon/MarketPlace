@@ -71,9 +71,10 @@ export default function Navbar() {
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-8 w-auto"
-                  src="src\assets\axion2.png"
+                  className="h-8 w-auto rounded-xl"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6LyeAvBOt_yeqTIO6m40zdOdAtBsVj1y_I3hMGALiCg&s"
                 />
+
               </Link>
             </div>
 
