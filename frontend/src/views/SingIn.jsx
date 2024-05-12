@@ -54,8 +54,10 @@ const SignIn = () => {
       });
   };
 
-  const onSuccess = (response) => {
-    console.log(response);
+  const onSuccess = (user) => {
+    setAuthUser(user);
+    alert(`Bienvenido ${user.nombre}`);
+    navigate('/');
   };
 
   const Onfailure = (response) => {
