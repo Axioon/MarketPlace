@@ -106,6 +106,7 @@ const SignIn = () => {
       onSuccess={onSuccess}
       onFailure={Onfailure}
       cookiePolicy= {"single_host_policy"}
+      className=' mr-6'
       />
       {/* Hipervínculo para registrarse */}
       <p className="text-center mt-4">¿Aún no tienes cuenta? <Link to="/create-account" className="text-blue-500">Regístrate</Link></p>
