@@ -1,9 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import axios from '../config/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom'; // Importa Link desde react-router-dom
 import { AuthContext } from '../context/AuthProvider';
+import {gapi} from "gapi-script"
+import GoogleLogin from 'react-google-login'
+
 
 const SignIn = () => {
+  const clienteID = "667204589523-ir2m1qif0irjov6aqln2cn3m9dd6domj.apps.googleusercontent.com";
+
+  useEffect(() => {
+    const start = () =>{
+      gapi.auth2.init( {
+        clientId: clienteID,
+      })
+    }
+    gapi.load("client:auth2", start)
+  }, []);
+
   const [formData, setFormData] = useState({
     correo_electronico: "",
     contrasena: "",
@@ -38,6 +52,14 @@ const SignIn = () => {
         console.error('Error en el inicio de sesión:', error.response.data);
         alert('Error en el inicio de sesión: ' + error.response.data.message);
       });
+  };
+
+  const onSuccess = (response) => {
+    console.log(response);
+  };
+
+  const Onfailure = (response) => {
+    console.log("algo esta mal");
   };
 
   return (
@@ -77,7 +99,12 @@ const SignIn = () => {
           Iniciar Sesión
         </button>
       </form>
-      
+      <GoogleLogin
+      clienteId= {clienteID}
+      onSuccess={onSuccess}
+      onFailure={Onfailure}
+      cookiePolicy= {"single_host_policy"}
+      />
       {/* Hipervínculo para registrarse */}
       <p className="text-center mt-4">¿Aún no tienes cuenta? <Link to="/create-account" className="text-blue-500">Regístrate</Link></p>
     </div>
