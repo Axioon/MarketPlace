@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCarrito } from '../hooks/useCarrito';
-
+import {  } from "../context/CarritoProvider";
 function Categories({ category }) {
     const [articles, setArticles] = useState([]);
     const { carrito, agregarAlCarrito} = useCarrito();

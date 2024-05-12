@@ -45,7 +45,7 @@ export function CarritoProvider({ children }) {
   };
 
   return (
-    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, eliminarDelCarrito, eliminarTodoElCarrito, contarArticulos }}>
+    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, eliminarDelCarrito, eliminarTodoElCarrito, contarArticulos,setCarrito }}>
       {children}
     </CarritoContext.Provider>
   );
