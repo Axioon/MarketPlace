@@ -4,7 +4,7 @@ import axios from 'axios';
 export const AxiosContext = createContext();
 
 export function AxiosProvider({ children }) {
-    axios.defaults.baseURL = 'http://localhost:3000/api/v1';
+    axios.defaults.baseURL = 'https://api.render.com/deploy/srv-cp01euo21fec73ft0lh0?key=kx3HKgdsbTA';
 
  
 
