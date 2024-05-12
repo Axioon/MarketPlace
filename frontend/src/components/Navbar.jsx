@@ -77,8 +77,96 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Flyout menus */}
-            <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+            {/* Mobile Menu */}
+            <Transition.Root show={open} as={Fragment}>
+              <Dialog as="div" className="fixed inset-0 z-40 lg:hidden" onClose={setOpen}>
+                <Transition.Child
+                  as={Fragment}
+                  enter="transition-opacity ease-linear duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="transition-opacity ease-linear duration-300"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
+                </Transition.Child>
+
+                <Transition.Child
+                  as={Fragment}
+                  enter="transition ease-out duration-300"
+                  enterFrom="transform -translate-x-full"
+                  enterTo="transform translate-x-0"
+                  leave="transition ease-in duration-300"
+                  leaveFrom="transform translate-x-0"
+                  leaveTo="transform -translate-x-full"
+                >
+                  <div className="relative flex flex-col h-full w-64 bg-white shadow-xl">
+                    <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                      <div>
+                        <Link to="/">
+                          <img
+                            className="h-8 w-auto"
+                            src="src\assets\axion2.png"
+                            alt="Logo"
+                          />
+                        </Link>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="rounded-md text-gray-400 hover
+                          text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          onClick={() => setOpen(false)}
+                        >
+                          <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                          <span className="sr-only">Close menu</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto">
+                      <div className="p-4 space-y-6">
+                        {navigation.categories.map((category) => (
+                          <div key={category.name}>
+                            <h3 className="text-lg font-medium text-gray-900">{category.name}</h3>
+                            <div className="mt-2 grid grid-cols-1 gap-y-4">
+                              {category.sections.map((section) => (
+                                <Link
+                                  key={section.name}
+                                  to={section.to}
+                                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                                >
+                                  {section.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+
+                        <div>
+                          <h3 className="text-lg font-medium text-gray-900">Pages</h3>
+                          <div className="mt-2 grid grid-cols-1 gap-y-4">
+                            {navigation.pages.map((page) => (
+                              <Link
+                                key={page.name}
+                                to={page.to}
+                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                              >
+                                {page.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Transition.Child>
+              </Dialog>
+            </Transition.Root>
+
+            {/* Desktop Menu */}
+            <div className="hidden lg:ml-8 lg:block lg:self-stretch">
               <div className="flex h-full space-x-4">
                 {navigation.categories.map((category) => (
                   <Popover key={category.name} className="flex">
@@ -141,35 +229,26 @@ export default function Navbar() {
                   </Link>
                 ))}
               </div>
-            </Popover.Group>
+            </div>
 
             <div className="ml-auto flex items-center">
+              {authUser ? (
+                <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  Cerrar sesión
+                </button>
+              ) : (
+                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                  <Link to="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                    Sign in
+                  </Link>
+                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                    Create account
+                  </Link>
+                  <Modal className="mr-5" />
+                </div>
+              )}
 
-          {authUser ? (
-            <>
-               <button onClick={handleLogout} className="text-sm font-medium text-gray-700 hover:text-gray-800">
-              Cerrar sesión
-            </button>
-
-           
-            
-            
-            </>
-         
-            
-          ) : (
-            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-              <Link to="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                Sign in
-              </Link>
-              <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-              <Link to="/create-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                Create account
-              </Link>
-              
-            <Modal className= " mr-5"/>
-            </div>
-          )}
               {/* Search */}
               <div className="flex lg:ml-6">
                 <Link to="/search" className="p-2 text-gray-400 hover:text-gray-500">
@@ -179,7 +258,6 @@ export default function Navbar() {
               </div>
 
               {/* Cart */}
-          
             </div>
           </div>
         </div>
